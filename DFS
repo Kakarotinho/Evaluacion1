@@ -7,7 +7,7 @@ void main()
 {
 int tam=8;
  
-    //read the adjecency matrix
+    //MATRIZ DE ADYACENCIA
   	matriz[0][1]=1;
 	matriz[0][4]=1;
 	matriz[0][5]=1;
@@ -48,7 +48,7 @@ int tam=8;
 		printf("\n\n");
 		
 	}
-    //visitados is initialized to zero
+    //visitados se inicializa en 0
   
         visitados[0]=0;
         visitados[1]=0;
