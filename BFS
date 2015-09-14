@@ -1,0 +1,205 @@
+#include <stdio.h>
+
+#define tam 8
+
+ 
+
+void imprimir_array(char array[tam])
+{
+
+array[0]='A';
+array[1]='B';
+array[2]='C'; 
+array[3]='D';
+array[4]='E';
+array[5]='F';
+array[6]='G';
+array[7]='H';
+
+	printf("\n");
+	printf("ESTOS SON LOS VERTICES DE NUESTRO GRAFO:");
+	printf("\n");
+
+	int i=0;
+	while (i<tam)
+	{
+		printf(" %c",array[i]);
+		i++;
+	}
+	printf("\n");
+
+}
+void imprimir_matriz(int matriz[tam][tam]){
+int i,j,k,l;
+
+	k=0;
+	while(k<tam)
+        {
+		l=0;
+		while(l<tam)
+                {
+				matriz[k][l]=0;	
+			l++;
+		}
+                k++;
+		printf("\n\n");
+		
+	}
+	matriz[0][1]=1;
+	matriz[0][4]=1;
+	matriz[0][5]=1;
+	matriz[1][0]=1;
+	matriz[1][2]=1;
+	matriz[1][5]=1;
+	matriz[2][1]=1;
+	matriz[2][3]=1;
+	matriz[2][5]=1;
+	matriz[2][6]=1;
+	matriz[3][2]=1;
+	matriz[3][7]=1;
+	matriz[4][0]=1;
+	matriz[4][5]=1;
+	matriz[5][0]=1;
+	matriz[5][1]=1;
+	matriz[5][2]=1;
+	matriz[5][4]=1;
+	matriz[5][6]=1;
+	matriz[6][2]=1;
+	matriz[6][5]=1;
+	matriz[6][7]=1;
+	matriz[7][3]=1;
+	matriz[7][6]=1;
+	
+	printf("'ESTA ES LA MATRIZ DE ADYACENCA:\n\n");
+	printf(" A   B   C   D   E   F   G   H\n\n");
+
+	
+
+
+	i=0;
+	while(i<tam)
+        {
+		j=0;
+		while(j<tam)
+                {
+				printf(" %d  ",matriz[i][j]);	
+			j++;
+		}
+                i++;
+		printf("\n\n");
+		
+	}
+}
+
+ void inicializar_color(int color[tam])
+ {
+ int i=0;
+ 	while(i<tam)
+ 	{
+ 		color[i]=0;
+ 		i++;
+ 	}
+ 	color[0]=1;
+ 	
+ }
+ 
+ void imprimir_color(int color[tam])
+ {
+ int i=0;
+ 	printf("etiqueta: A|B|C|D|E|F|G|H\n");
+ 	printf("colores:  ");
+ 	for(i=0;i<tam;i++)
+	{
+		printf("%d|",color[i]);
+		
+	}
+	printf("\n");
+ 
+ }
+ void inicializar_coor(int coor[tam])
+ {
+ 	int i=0;
+ 	for(i=0;i<tam;i++)
+ 	{
+ 		coor[i]=i;
+ 		//printf("%d",coor[i]);
+ 	}
+ }
+ 
+int sig_gris(int color[tam])
+ {
+ int i,m;
+ i=0;
+	while (i<tam)
+	{
+		if (color[i]==1)
+		{
+			m=i;
+			i=tam;
+		}
+		i++;
+	}
+	return m;
+ }
+ 
+
+
+
+void bfs(int *tiempo, int coor[tam],int matriz[tam][tam],int color[tam], char array[tam])
+{
+	int j=0;
+	
+	while(j<tam)
+	{	
+	
+		if (matriz[*tiempo][j]==1)
+		{
+		
+			if (color[j]==0)
+			{
+		   		 color[j]=1;
+		   		 
+		 	}
+		    
+						}
+					printf(" (");
+					printf( "%d",*tiempo);
+					printf(" %d",j);
+					printf(")");
+					printf("\n");
+		j++;
+		}
+			color[*tiempo]=2;
+			*tiempo=sig_gris(color);
+			printf("iteración # ");
+			printf( "%d\n",*tiempo);
+			imprimir_color(color);
+			
+	
+}
+
+main()
+{
+
+char array[tam];
+int tiempo,fin, matriz[tam][tam], color[tam],coor[tam];
+tiempo=0;fin=0;
+imprimir_matriz(matriz);
+printf("0=NO VISITADO (BLANCO)\n");
+printf("1=VISITADO(GRIS)\n");
+printf("2=DESCARTADO(NEGRO)\n");
+imprimir_array(array);
+inicializar_coor(coor);
+inicializar_color(color);
+imprimir_color(color);
+
+		while(tiempo<tam-1)
+		{
+		bfs(&tiempo,coor,matriz,color,array);
+		
+		
+		}
+printf("colores al final del algoritmo]\n");
+imprimir_color(color);
+	
+}
